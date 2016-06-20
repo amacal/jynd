@@ -19,12 +19,12 @@ if (instance.age > 18)
 ## benchmark
 
 ```` text
-Newtonsoft-static  : 00:00:08.8787914
-Newtonsoft-dynamic : 00:00:15.4254987
-Jil-static         : 00:00:02.2103270
-Jil-dynamic        : 00:00:06.6172323
-NetJSON-static     : 00:00:02.4847555
-Jynd-dynamic       : 00:00:02.4997822
+Newtonsoft-static  : 00:00:19.3816103
+Newtonsoft-dynamic : 00:00:33.4836211
+Jil-static         : 00:00:04.7730814
+Jil-dynamic        : 00:00:15.0509291
+NetJSON-static     : 00:00:04.8423103
+Jynd-dynamic       : 00:00:05.3660046
 ````
 
 ## restrictions
@@ -32,6 +32,7 @@ Jynd-dynamic       : 00:00:02.4997822
 * white characters between tokens are not accepted
 * property name character escaping is not accepted
 * numeric are deserialized currently only as positive integers
+* deserialized object should be consumed before deserializing next one
 * only object a a root
 
 ## comparison

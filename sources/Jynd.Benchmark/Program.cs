@@ -1,6 +1,7 @@
 ﻿using Jil;
 using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 
 namespace Jynd.Benchmark
 {
@@ -22,74 +23,74 @@ namespace Jynd.Benchmark
 
         private static TimeSpan UseNewtonsoftDynamic(string data)
         {
-            DateTime start = DateTime.Now;
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
             for (int i = 0; i < 1000000; i++)
             {
                 Check(JsonConvert.DeserializeObject(data));
             }
 
-            return DateTime.Now - start;
+            return stopwatch.Elapsed;
         }
 
         private static TimeSpan UseNewtonsoftStatic(string data)
         {
-            DateTime start = DateTime.Now;
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
             for (int i = 0; i < 1000000; i++)
             {
                 Check(JsonConvert.DeserializeObject<Person>(data));
             }
 
-            return DateTime.Now - start;
+            return stopwatch.Elapsed;
         }
 
         private static TimeSpan UseJilDynamic(string data)
         {
-            DateTime start = DateTime.Now;
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
             for (int i = 0; i < 1000000; i++)
             {
                 Check(JSON.DeserializeDynamic(data));
             }
 
-            return DateTime.Now - start;
+            return stopwatch.Elapsed;
         }
 
         private static TimeSpan UseJilStatic(string data)
         {
-            DateTime start = DateTime.Now;
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
             for (int i = 0; i < 1000000; i++)
             {
                 Check(JSON.Deserialize<Person>(data));
             }
 
-            return DateTime.Now - start;
+            return stopwatch.Elapsed;
         }
 
         private static TimeSpan UseNetJsonStatic(string data)
         {
-            DateTime start = DateTime.Now;
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
             for (int i = 0; i < 1000000; i++)
             {
                 Check(NetJSON.NetJSON.Deserialize<Person>(data));
             }
 
-            return DateTime.Now - start;
+            return stopwatch.Elapsed;
         }
 
         private static TimeSpan UseJyndDynamic(string data)
         {
-            DateTime start = DateTime.Now;
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
             for (int i = 0; i < 1000000; i++)
             {
                 Check(JyndConvert.Deserialize(data));
             }
 
-            return DateTime.Now - start;
+            return stopwatch.Elapsed;
         }
 
         private static void Check(dynamic instance)
