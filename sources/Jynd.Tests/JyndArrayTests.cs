@@ -35,5 +35,18 @@ namespace Jynd.Tests
             Assert.That(data.value[0], Is.Not.Null);
             Assert.That(data.value[0].data, Is.EqualTo(3));
         }
+
+        [Test]
+        public void CanAccessDeserializedNestedArrayWithForNumbersInside()
+        {
+            string json = @"{""value"":[0,1,2,3]}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.value, Has.Length.EqualTo(4));
+            Assert.That(data.value[0], Is.EqualTo(0));
+            Assert.That(data.value[1], Is.EqualTo(1));
+            Assert.That(data.value[2], Is.EqualTo(2));
+            Assert.That(data.value[3], Is.EqualTo(3));
+        }
     }
 }

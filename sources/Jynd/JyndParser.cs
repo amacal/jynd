@@ -194,7 +194,7 @@ namespace Jynd
             do
             {
                 character = data.Source[++position];
-                completed = character == ',' || character == '}';
+                completed = character == ',' || character == '}' || character == ']';
             }
             while (completed == false);
         }

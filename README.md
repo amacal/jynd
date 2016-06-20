@@ -6,7 +6,7 @@ A library aims to deserialize json structure without being json deserializer.
 
 ```` csharp
 string json = "{'firstName':'John','lastName':'Smith','isAlive':true,'age':25}";
-string text = json..Replace('\'', '\"');
+string text = json.Replace('\'', '\"');
 dynamic instance = JyndConvert.Deserialize(text);
 
 if (instance.age > 18)
@@ -19,12 +19,12 @@ if (instance.age > 18)
 ## benchmark
 
 ```` text
-Newtonsoft-static  : 00:00:19.3743379
-Newtonsoft-dynamic : 00:00:33.1510260
-Jil-static         : 00:00:04.7653259
-Jil-dynamic        : 00:00:14.9730451
-NetJSON-static     : 00:00:16.1322889
-Jynd-dynamic       : 00:00:05.4039146
+Newtonsoft-static  : 00:00:08.8787914
+Newtonsoft-dynamic : 00:00:15.4254987
+Jil-static         : 00:00:02.2103270
+Jil-dynamic        : 00:00:06.6172323
+NetJSON-static     : 00:00:02.4847555
+Jynd-dynamic       : 00:00:02.4997822
 ````
 
 ## restrictions
@@ -32,6 +32,7 @@ Jynd-dynamic       : 00:00:05.4039146
 * white characters between tokens are not accepted
 * property name character escaping is not accepted
 * numeric are deserialized currently only as positive integers
+* only object a a root
 
 ## comparison
 
