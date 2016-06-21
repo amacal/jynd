@@ -70,6 +70,15 @@ namespace Jynd.Tests
         }
 
         [Test]
+        public void CanAccessDeserializedPropertyAfterEscapedText()
+        {
+            string json = @"{""escaped"":""102\\"",""value"":1}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.value, Is.EqualTo(1));
+        }
+
+        [Test]
         public void ThrowsExceptionOnUnknownProperty()
         {
             string json = @"{""value"":""a"",""data"":""b""}";

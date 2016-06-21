@@ -144,6 +144,7 @@ namespace Jynd
             if (escaping)
             {
                 dataLength = -dataLength;
+                escaping = false;
             }
 
             data.Add(start, length, instances[depth], offset, dataLength, assigned);
@@ -157,7 +158,7 @@ namespace Jynd
 
             while (data.Source[position] != '"' || escaped)
             {
-                escaped = data.Source[position] == '\\';
+                escaped = data.Source[position] == '\\' && escaped == false;
                 escaping |= escaped;
                 position++;
             }
