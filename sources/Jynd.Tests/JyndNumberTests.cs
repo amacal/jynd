@@ -13,5 +13,14 @@ namespace Jynd.Tests
 
             Assert.That(data.value, Is.EqualTo(123));
         }
+
+        [Test]
+        public void CanAccessDeserializedInt32WithNegation()
+        {
+            string json = @"{""value"":-123}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.value, Is.EqualTo(-123));
+        }
     }
 }

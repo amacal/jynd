@@ -155,12 +155,28 @@ namespace Jynd
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetNumber(this JyndData data, JyndItem item)
         {
+            bool negate = false;
+
             int value = 0;
             int zero = '0';
 
-            for (int i = item.Data; i < item.Data + item.DataLength; i++)
+            int offset = item.Data;
+            int end = offset + item.DataLength;
+
+            if (data.Source[offset] == '-')
+            {
+                negate = true;
+                offset++;
+            }
+
+            for (int i = offset; i < end; i++)
             {
                 value = 10 * value + data.Source[i] - zero;
+            }
+
+            if (negate)
+            {
+                value = -value;
             }
 
             return value;

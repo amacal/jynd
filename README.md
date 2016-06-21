@@ -31,7 +31,7 @@ Jynd-dynamic       : 00:00:05.3660046
 
 * white characters between tokens are not accepted
 * property name character escaping is not accepted
-* numeric are deserialized currently only as positive integers
+* numeric are deserialized currently only as Int32
 * deserialized object should be consumed before deserializing next one
 * only object a a root
 
