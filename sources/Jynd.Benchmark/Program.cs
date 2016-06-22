@@ -1,5 +1,6 @@
 ﻿using Jil;
 using Newtonsoft.Json;
+using ServiceStack;
 using System;
 using System.Diagnostics;
 
@@ -13,12 +14,13 @@ namespace Jynd.Benchmark
         {
             string data = Data.Replace('\'', '\"');
 
-            Console.WriteLine($"Newtonsoft-static  : {UseNewtonsoftStatic(data)}");
-            Console.WriteLine($"Newtonsoft-dynamic : {UseNewtonsoftDynamic(data)}");
-            Console.WriteLine($"Jil-static         : {UseJilStatic(data)}");
-            Console.WriteLine($"Jil-dynamic        : {UseJilDynamic(data)}");
-            Console.WriteLine($"NetJSON-static     : {UseNetJsonStatic(data)}");
-            Console.WriteLine($"Jynd-dynamic       : {UseJyndDynamic(data)}");
+            Console.WriteLine($"Newtonsoft-static    : {UseNewtonsoftStatic(data)}");
+            Console.WriteLine($"Newtonsoft-dynamic   : {UseNewtonsoftDynamic(data)}");
+            Console.WriteLine($"Jil-static           : {UseJilStatic(data)}");
+            Console.WriteLine($"Jil-dynamic          : {UseJilDynamic(data)}");
+            Console.WriteLine($"NetJSON-static       : {UseNetJsonStatic(data)}");
+            Console.WriteLine($"ServiceStack-static  : {UseServiceStackStatic(data)}");
+            Console.WriteLine($"Jynd-dynamic         : {UseJyndDynamic(data)}");
         }
 
         private static TimeSpan UseNewtonsoftDynamic(string data)
@@ -76,6 +78,18 @@ namespace Jynd.Benchmark
             for (int i = 0; i < 1000000; i++)
             {
                 Check(NetJSON.NetJSON.Deserialize<Person>(data));
+            }
+
+            return stopwatch.Elapsed;
+        }
+
+        private static TimeSpan UseServiceStackStatic(string data)
+        {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+
+            for (int i = 0; i < 1000000; i++)
+            {
+                Check(data.FromJson<Person>());
             }
 
             return stopwatch.Elapsed;

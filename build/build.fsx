@@ -32,16 +32,16 @@ Target "BuildTests" (fun _ ->
 
 Target "ExecuteTests" (fun _ ->
     !! ("build/tests/*Tests*.dll")
-        |> NUnit3 (fun p -> 
+        |> NUnit3 (fun p ->
             { p with
                 WorkingDir = "."
                 ToolPath = findToolInSubPath "nunit3-console.exe" "build" })
 )
 
 Target "CreatePackage" (fun _ ->
-     NuGet (fun p -> 
+     NuGet (fun p ->
         { p with
-            Version = "1.3"
+            Version = "1.4"
             OutputPath = "./build/package"
             WorkingDir = "./build/release"
             Dependencies = []
@@ -53,12 +53,12 @@ Target "Default" (fun _ ->
     trace "Build completed."
 )
 
-"Clean" 
+"Clean"
     ==> "Restore"
     ==> "BuildApp"
     ==> "BuildTests"
     ==> "ExecuteTests"
     ==> "CreatePackage"
-    ==> "Default"    
+    ==> "Default"
 
 RunTargetOrDefault "Default"

@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Jynd
@@ -153,33 +154,85 @@ namespace Jynd
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int GetNumber(this JyndData data, JyndItem item)
+        private unsafe static object GetNumber(this JyndData data, JyndItem item)
         {
-            bool negate = false;
+            fixed (char* ptr = data.Source)
+            {
+                char* str = ptr + item.Data;
+                int length = item.DataLength;
+                bool signed = *str == '-';
 
+                if (signed)
+                {
+                    length--;
+                    str++;
+                }
+
+                if (length < 10)
+                    return GetNumberAsInt32(str, item, signed, length);
+
+                if (length > 10)
+                    return GetNumberAsInt64(str, item, signed, length);
+
+                return GetNumberAsInt32OrInt64(str, item, signed, length);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private unsafe static int GetNumberAsInt32(char* str, JyndItem item, bool signed, int length)
+        {
             int value = 0;
-            int zero = '0';
 
-            int offset = item.Data;
-            int end = offset + item.DataLength;
-
-            if (data.Source[offset] == '-')
+            while (length-- > 0)
             {
-                negate = true;
-                offset++;
+                value = 10 * value + (*str++ - '0');
             }
 
-            for (int i = offset; i < end; i++)
+            if (signed)
             {
-                value = 10 * value + data.Source[i] - zero;
+                return -value;
             }
 
-            if (negate)
+            return value;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private unsafe static long GetNumberAsInt64(char* str, JyndItem item, bool signed, int length)
+        {
+            long value = 0;
+
+            while (length-- > 0)
+            {
+                value = 10 * value + (*str++ - '0');
+            }
+
+            if (signed)
+            {
+                return -value;
+            }
+
+            return value;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private unsafe static object GetNumberAsInt32OrInt64(char* str, JyndItem item, bool signed, int length)
+        {
+            long value = 0;
+
+            while (length-- > 0)
+            {
+                value = 10 * value + (*str++ - '0');
+            }
+
+            if (signed)
             {
                 value = -value;
             }
 
-            return value;
+            if (value > Int32.MaxValue || value < Int32.MinValue)
+                return value;
+
+            return (int)value;
         }
     }
 }
