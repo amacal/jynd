@@ -2,14 +2,14 @@
 {
     public struct JyndItem
     {
-        public int Hash;
+        public short Hash;
 
-        public int Index;
-        public int IndexLength;
-        public int IndexInstance;
+        public short Index;
+        public short IndexLength;
+        public short IndexInstance;
 
-        public int Data;
-        public int DataLength;
-        public int DataInstance;
+        public short Data;
+        public short DataLength;
+        public short DataInstance;
     }
 }

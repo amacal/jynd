@@ -19,13 +19,13 @@ if (instance.age > 18)
 ## benchmark
 
 ```` text
-Newtonsoft-static    : 00:00:19.6265434
-Newtonsoft-dynamic   : 00:00:34.3134509
-Jil-static           : 00:00:04.9729328
-Jil-dynamic          : 00:00:15.5791588
-NetJSON-static       : 00:00:05.0164794
-ServiceStack-static  : 00:00:16.4114428
-Jynd-dynamic         : 00:00:05.6991778
+Newtonsoft-static    : 00:00:19.1861077
+Newtonsoft-dynamic   : 00:00:34.1148832
+Jil-static           : 00:00:04.7849318
+Jil-dynamic          : 00:00:15.0446824
+NetJSON-static       : 00:00:04.9173038
+ServiceStack-static  : 00:00:16.0641011
+Jynd-dynamic         : 00:00:04.8204089
 ````
 
 ## restrictions
@@ -38,6 +38,13 @@ Jynd-dynamic         : 00:00:05.6991778
 * maximum total number of properties and array items: 256
 * only json primitives; no datetime, no guid etc.
 * only object as a root
+
+## contribution
+
+* if something can be optimized, just suggest it with test case
+* if you found bug, just report it with test case
+* if something is not supported, just suggest it
+* if you do not agree with published benchmarks, just suggest new one
 
 ## comparison
 

@@ -5,15 +5,15 @@ namespace Jynd
     public class JyndParser
     {
         private readonly JyndData data;
-        private readonly int[] instances;
+        private readonly short[] instances;
 
-        private int position;
-        private int instance;
-        private int depth;
+        private short position;
+        private short instance;
+        private short depth;
 
         private bool escaping;
 
-        public JyndParser(JyndData data, int[] instances)
+        public JyndParser(JyndData data, short[] instances)
         {
             this.data = data;
             this.instances = instances;
@@ -27,9 +27,9 @@ namespace Jynd
             GetValue();
         }
 
-        private int GetValue()
+        private short GetValue()
         {
-            int assigned = 0;
+            short assigned = 0;
 
             switch (data.Source[position])
             {
@@ -117,16 +117,16 @@ namespace Jynd
 
         private void ProcessArrayItem()
         {
-            int start = position;
+            short start = position;
 
             GetValue();
-            data.Add(0, 0, instances[depth], start, position - start, instances[depth] + 1);
+            data.Add(0, 0, instances[depth], start, (short)(position - start), (short)(instances[depth] + 1));
         }
 
         private void ProcessProperty()
         {
-            int length = 0;
-            int start = position;
+            short length = 0;
+            short start = position;
 
             while (data.Source[position] != '"')
             {
@@ -137,13 +137,13 @@ namespace Jynd
             position++;
             position++;
 
-            int offset = position;
-            int assigned = GetValue();
-            int dataLength = position - offset;
+            short offset = position;
+            short assigned = GetValue();
+            short dataLength = (short)(position - offset);
 
             if (escaping)
             {
-                dataLength = -dataLength;
+                dataLength = (short)-dataLength;
                 escaping = false;
             }
 

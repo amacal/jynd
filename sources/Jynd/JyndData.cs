@@ -25,7 +25,7 @@ namespace Jynd
             get { return source; }
         }
 
-        public void Add(int index, int indexLength, int indexInstance, int data, int dataLength, int dataInstance)
+        public void Add(short index, short indexLength, short indexInstance, short data, short dataLength, short dataInstance)
         {
             items[count++] = new JyndItem
             {
@@ -92,15 +92,15 @@ namespace Jynd
             return ToHash(text, 0, text.Length);
         }
 
-        private static int ToHash(string text, int offset, int length)
+        private static short ToHash(string text, int offset, int length)
         {
-            int hash = 5381;
+            short hash = 5381;
 
             unchecked
             {
                 for (int i = offset; i < offset + length; i++)
                 {
-                    hash = (hash << 5) + hash + text[i];
+                    hash = (short)((hash << 1) + hash + text[i]);
                 }
             }
 

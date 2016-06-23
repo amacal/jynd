@@ -8,12 +8,12 @@ namespace Jynd
         private static JyndItem[] Items;
 
         [ThreadStatic]
-        private static int[] Instances;
+        private static short[] Instances;
 
         public static dynamic Deserialize(string json)
         {
             Items = Items ?? new JyndItem[256];
-            Instances = Instances ?? new int[32];
+            Instances = Instances ?? new short[32];
 
             JyndData data = new JyndData(json, Items);
             JyndParser parser = new JyndParser(data, Instances);

@@ -41,7 +41,7 @@ Target "ExecuteTests" (fun _ ->
 Target "CreatePackage" (fun _ ->
      NuGet (fun p ->
         { p with
-            Version = "1.4"
+            Version = "1.5"
             OutputPath = "./build/package"
             WorkingDir = "./build/release"
             Dependencies = []
