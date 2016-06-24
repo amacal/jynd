@@ -19,23 +19,33 @@ if (instance.age > 18)
 ## benchmark
 
 ```` text
-Newtonsoft-static    : 00:00:19.1861077
-Newtonsoft-dynamic   : 00:00:34.1148832
-Jil-static           : 00:00:04.7849318
-Jil-dynamic          : 00:00:15.0446824
-NetJSON-static       : 00:00:04.9173038
-ServiceStack-static  : 00:00:16.0641011
-Jynd-dynamic         : 00:00:04.8204089
+Benchmark            : wikipedia-person / 1000000
+Newtonsoft-static    : 00:00:19.6272074
+Jil-static           : 00:00:04.7679532
+NetJSON-static       : 00:00:04.9244612
+ServiceStack-static  : 00:00:16.1347406
+Newtonsoft-dynamic   : 00:00:34.6393721
+Jil-dynamic          : 00:00:14.6421480
+Jynd-dynamic         : 00:00:04.5511174
+
+Benchmark            : github-team / 1000000
+Newtonsoft-static    : 00:00:19.4548725
+Jil-static           : 00:00:08.7893441
+NetJSON-static       : 00:00:10.9093994
+ServiceStack-static  : 00:00:22.8296541
+Newtonsoft-dynamic   : 00:00:36.1920137
+Jil-dynamic          : 00:00:18.5099919
+Jynd-dynamic         : 00:00:06.1588427
 ````
 
 ## restrictions
 
+* parsed text is valid json
 * white characters between tokens are not accepted
 * property name character escaping is not accepted
 * numbers are deserialized currently only as Int32 or Int64
 * deserialized object should be consumed before deserializing next one
-* maximum structure depth: 32
-* maximum total number of properties and array items: 256
+* maximum total number of properties and array items: 65536
 * only json primitives; no datetime, no guid etc.
 * only object as a root
 

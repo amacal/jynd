@@ -10,12 +10,16 @@ namespace Jynd
         [ThreadStatic]
         private static short[] Instances;
 
+        [ThreadStatic]
+        private static short[] Hashes;
+
         public static dynamic Deserialize(string json)
         {
-            Items = Items ?? new JyndItem[256];
-            Instances = Instances ?? new short[32];
+            Items = Items ?? new JyndItem[UInt16.MaxValue];
+            Hashes = Hashes ?? new short[UInt16.MaxValue];
+            Instances = Instances ?? new short[UInt16.MaxValue];
 
-            JyndData data = new JyndData(json, Items);
+            JyndData data = new JyndData(json, Items, Hashes);
             JyndParser parser = new JyndParser(data, Instances);
 
             parser.Execute();

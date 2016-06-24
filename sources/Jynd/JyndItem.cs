@@ -2,7 +2,7 @@
 {
     public struct JyndItem
     {
-        public short Hash;
+        public ushort Hash;
 
         public short Index;
         public short IndexLength;

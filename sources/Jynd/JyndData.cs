@@ -7,13 +7,15 @@ namespace Jynd
     {
         private readonly string source;
         private readonly JyndItem[] items;
+        private readonly short[] hashes;
 
         private int size;
         private int count;
 
-        public JyndData(string source, JyndItem[] items)
+        public JyndData(string source, JyndItem[] items, short[] hashes)
         {
             this.size = items.Length;
+            this.hashes = hashes;
             this.count = 0;
 
             this.source = source;
@@ -27,9 +29,12 @@ namespace Jynd
 
         public void Add(short index, short indexLength, short indexInstance, short data, short dataLength, short dataInstance)
         {
+            ushort hash = ToHash(source, index, indexLength);
+
+            hashes[hash] = (short)count;
             items[count++] = new JyndItem
             {
-                Hash = ToHash(source, index, indexLength),
+                Hash = hash,
                 Index = index,
                 IndexLength = indexLength,
                 IndexInstance = indexInstance,
@@ -41,7 +46,22 @@ namespace Jynd
 
         public JyndItem? Find(string text, int instance)
         {
-            int hash = ToHash(text);
+            ushort hash = ToHash(text);
+            short index = hashes[hash];
+
+            if (index < count)
+            {
+                if (items[index].Hash == hash)
+                {
+                    if (items[index].IndexInstance == instance)
+                    {
+                        if (Equals(text, source, items[index].Index, items[index].IndexLength))
+                        {
+                            return items[index];
+                        }
+                    }
+                }
+            }
 
             for (int i = 0; i < count; i++)
             {
@@ -87,20 +107,20 @@ namespace Jynd
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static int ToHash(string text)
+        private static ushort ToHash(string text)
         {
             return ToHash(text, 0, text.Length);
         }
 
-        private static short ToHash(string text, int offset, int length)
+        private static ushort ToHash(string text, int offset, int length)
         {
-            short hash = 5381;
+            ushort hash = 5381;
 
             unchecked
             {
                 for (int i = offset; i < offset + length; i++)
                 {
-                    hash = (short)((hash << 1) + hash + text[i]);
+                    hash = (ushort)((hash << 1) + hash + text[i]);
                 }
             }
 
