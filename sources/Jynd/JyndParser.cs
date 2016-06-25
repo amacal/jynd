@@ -120,7 +120,7 @@ namespace Jynd
             short start = position;
 
             GetValue();
-            data.Add(0, 0, instances[depth], start, (short)(position - start), (short)(instances[depth] + 1));
+            data.AddItem(instances[depth], start, (short)(position - start), (short)(instances[depth] + 1));
         }
 
         private void ProcessProperty()
@@ -147,7 +147,7 @@ namespace Jynd
                 escaping = false;
             }
 
-            data.Add(start, length, instances[depth], offset, dataLength, assigned);
+            data.AddIndexed(start, length, instances[depth], offset, dataLength, assigned);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

@@ -6,6 +6,24 @@ namespace Jynd.Tests
     public class JyndArrayTests
     {
         [Test]
+        public void CanAccessDeserializedEmptyArray()
+        {
+            string json = @"[]";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data, Is.Empty);
+        }
+
+        [Test]
+        public void CanAccessDeserializedArray()
+        {
+            string json = @"[1,2,3]";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data, Is.EqualTo(new[] { 1, 2, 3 }));
+        }
+
+        [Test]
         public void CanAccessDeserializedNestedEmptyArray()
         {
             string json = @"{""value"":[]}";

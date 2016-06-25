@@ -20,34 +20,42 @@ if (instance.age > 18)
 
 ```` text
 Benchmark            : wikipedia-person / 1000000
-Newtonsoft-static    : 00:00:19.6272074
-Jil-static           : 00:00:04.7679532
-NetJSON-static       : 00:00:04.9244612
-ServiceStack-static  : 00:00:16.1347406
-Newtonsoft-dynamic   : 00:00:34.6393721
-Jil-dynamic          : 00:00:14.6421480
-Jynd-dynamic         : 00:00:04.5511174
+Newtonsoft-static    : 00:00:18.9277581
+Jil-static           : 00:00:04.7054016
+NetJSON-static       : 00:00:04.9326692
+ServiceStack-static  : 00:00:15.8308685
+Newtonsoft-dynamic   : 00:00:34.2476799
+Jil-dynamic          : 00:00:14.4239826
+Jynd-dynamic         : 00:00:04.4421680
 
 Benchmark            : github-team / 1000000
-Newtonsoft-static    : 00:00:19.4548725
-Jil-static           : 00:00:08.7893441
-NetJSON-static       : 00:00:10.9093994
-ServiceStack-static  : 00:00:22.8296541
-Newtonsoft-dynamic   : 00:00:36.1920137
-Jil-dynamic          : 00:00:18.5099919
-Jynd-dynamic         : 00:00:06.1588427
+Newtonsoft-static    : 00:00:19.0036560
+Jil-static           : 00:00:08.5937214
+NetJSON-static       : 00:00:10.8219491
+ServiceStack-static  : 00:00:22.4996151
+Newtonsoft-dynamic   : 00:00:34.0980454
+Jil-dynamic          : 00:00:18.3799502
+Jynd-dynamic         : 00:00:06.1867880
+
+Benchmark            : github-primes / 100000
+Newtonsoft-static    : 00:00:26.5159627
+Jil-static           : 00:00:06.4497767
+NetJSON-static       : 00:00:09.3411779
+ServiceStack-static  : 00:00:26.3383107
+Newtonsoft-dynamic   : 00:01:14.5194623
+Jil-dynamic          : 00:00:33.3409051
+Jynd-dynamic         : 00:00:13.4317191
 ````
 
 ## restrictions
 
+* maximum json size: 64kB
 * parsed text is valid json
 * white characters between tokens are not accepted
 * property name character escaping is not accepted
-* numbers are deserialized currently only as Int32 or Int64
+* numbers are deserialized currently only to Int32 or Int64
 * deserialized object should be consumed before deserializing next one
-* maximum total number of properties and array items: 65536
 * only json primitives; no datetime, no guid etc.
-* only object as a root
 
 ## contribution
 

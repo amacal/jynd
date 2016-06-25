@@ -23,7 +23,13 @@ namespace Jynd
             JyndParser parser = new JyndParser(data, Instances);
 
             parser.Execute();
-            return new JyndObject(data, 0);
+
+            if (data.Source[0] == '{')
+            {
+                return new JyndObject(data, 0);
+            }
+
+            return new JyndArray(data, 0);
         }
     }
 }

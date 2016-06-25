@@ -27,7 +27,7 @@ namespace Jynd
             get { return source; }
         }
 
-        public void Add(short index, short indexLength, short indexInstance, short data, short dataLength, short dataInstance)
+        public void AddIndexed(short index, short indexLength, short indexInstance, short data, short dataLength, short dataInstance)
         {
             ushort hash = ToHash(source, index, indexLength);
 
@@ -37,6 +37,18 @@ namespace Jynd
                 Hash = hash,
                 Index = index,
                 IndexLength = indexLength,
+                IndexInstance = indexInstance,
+                Data = data,
+                DataLength = dataLength,
+                DataInstance = dataInstance
+            };
+        }
+
+        public void AddItem(short indexInstance, short data, short dataLength, short dataInstance)
+        {
+            items[count++] = new JyndItem
+            {
+                Hash = 0,
                 IndexInstance = indexInstance,
                 Data = data,
                 DataLength = dataLength,
