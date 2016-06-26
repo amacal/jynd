@@ -57,7 +57,11 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Benchmark.cs" />
     <Compile Include="BenchmarkCase.cs" />
+    <Compile Include="Cases\GitHubPrimesCase.cs" />
+    <Compile Include="Cases\GitHubTeamCase.cs" />
+    <Compile Include="Cases\WikipediaPersonCase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

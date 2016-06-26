@@ -8,6 +8,8 @@ namespace Jynd.Benchmark
 
         public string Data;
 
+        public string Source;
+
         public int Iterations;
 
         public Action<T> OnStatic;
