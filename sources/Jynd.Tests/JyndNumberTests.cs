@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Numerics;
 
 namespace Jynd.Tests
 {
@@ -54,7 +55,7 @@ namespace Jynd.Tests
         }
 
         [Test]
-        public void CanAccessDeserializedInt32MaxValuePlusOneAndAsInt64()
+        public void CanAccessDeserializedInt32MaxValuePlusOneAsInt64()
         {
             string json = @"{""value"":2147483648}";
             dynamic data = JyndConvert.Deserialize(json);
@@ -71,6 +72,24 @@ namespace Jynd.Tests
 
             Assert.That(data.value, Is.EqualTo(-2147483649L));
             Assert.That(data.value, Is.TypeOf<long>());
+        }
+
+        [Test]
+        public void CanAccessDeserializedInt64()
+        {
+            string json = @"{""value"":922337203685}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.value, Is.EqualTo(922337203685L));
+        }
+
+        [Test]
+        public void CanAccessDeserializedInt64WithNegation()
+        {
+            string json = @"{""value"":-922337203685}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.value, Is.EqualTo(-922337203685L));
         }
 
         [Test]
@@ -91,6 +110,46 @@ namespace Jynd.Tests
 
             Assert.That(data.value, Is.EqualTo(-9223372036854775808L));
             Assert.That(data.value, Is.TypeOf<long>());
+        }
+
+        [Test]
+        public void CanAccessDeserializedInt64MaxValuePlusOneAsBigInteger()
+        {
+            string json = @"{""value"":9223372036854775808}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.value > 9223372036854775807L, Is.True);
+            Assert.That(data.value, Is.TypeOf<BigInteger>());
+        }
+
+        [Test]
+        public void CanAccessDeserializedInt64MinValueMinusOneAsBigInteger()
+        {
+            string json = @"{""value"":-9223372036854775809}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.value < -9223372036854775808L, Is.True);
+            Assert.That(data.value, Is.TypeOf<BigInteger>());
+        }
+
+        [Test]
+        public void CanAccessDeserializedBigInteger()
+        {
+            string json = @"{""value"":92233720368532743274237423742342134}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            BigInteger value = BigInteger.Parse("92233720368532743274237423742342134");
+            Assert.That(data.value, Is.EqualTo(value));
+        }
+
+        [Test]
+        public void CanAccessDeserializedBigIntegerWithNegation()
+        {
+            string json = @"{""value"":-92233720368532743274237423742342134}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            BigInteger value = BigInteger.Parse("-92233720368532743274237423742342134");
+            Assert.That(data.value, Is.EqualTo(value));
         }
     }
 }

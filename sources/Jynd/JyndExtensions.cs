@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -34,7 +35,7 @@ namespace Jynd
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string GetText(this JyndData data, JyndItem item)
+        private static string GetText(this JyndData data, JyndItem item)
         {
             if (item.DataLength > 0)
                 return data.Source.Substring(item.Data + 1, item.DataLength - 2);
@@ -124,31 +125,31 @@ namespace Jynd
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static object GetNull(this JyndData data, JyndItem item)
+        private static object GetNull(this JyndData data, JyndItem item)
         {
             return null;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool GetTrue(this JyndData data, JyndItem item)
+        private static bool GetTrue(this JyndData data, JyndItem item)
         {
             return true;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool GetFalse(this JyndData data, JyndItem item)
+        private static bool GetFalse(this JyndData data, JyndItem item)
         {
             return false;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static JyndObject GetObject(this JyndData data, JyndItem item)
+        private static JyndObject GetObject(this JyndData data, JyndItem item)
         {
             return new JyndObject(data, item.DataInstance);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static JyndArray GetArray(this JyndData data, JyndItem item)
+        private static JyndArray GetArray(this JyndData data, JyndItem item)
         {
             return new JyndArray(data, item.DataInstance);
         }
@@ -171,10 +172,16 @@ namespace Jynd
                 if (length < 10)
                     return GetNumberAsInt32(str, item, signed, length);
 
-                if (length > 10)
+                if (length == 10)
+                    return GetNumberAsInt32OrInt64(str, item, signed, length);
+
+                if (length > 10 && length < 19)
                     return GetNumberAsInt64(str, item, signed, length);
 
-                return GetNumberAsInt32OrInt64(str, item, signed, length);
+                if (length == 19)
+                    return GetNumberAsInt64OrBigInteger(str, item, signed, length);
+
+                return GetNumberAsBigInteger(str, item, signed, length);
             }
         }
 
@@ -215,6 +222,24 @@ namespace Jynd
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private unsafe static BigInteger GetNumberAsBigInteger(char* str, JyndItem item, bool signed, int length)
+        {
+            BigInteger value = 0;
+
+            while (length-- > 0)
+            {
+                value = 10 * value + (*str++ - '0');
+            }
+
+            if (signed)
+            {
+                return -value;
+            }
+
+            return value;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private unsafe static dynamic GetNumberAsInt32OrInt64(char* str, JyndItem item, bool signed, int length)
         {
             long value = 0;
@@ -233,6 +258,27 @@ namespace Jynd
                 return value;
 
             return (int)value;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private unsafe static dynamic GetNumberAsInt64OrBigInteger(char* str, JyndItem item, bool signed, int length)
+        {
+            BigInteger value = 0;
+
+            while (length-- > 0)
+            {
+                value = 10 * value + (*str++ - '0');
+            }
+
+            if (signed)
+            {
+                value = -value;
+            }
+
+            if (value > Int64.MaxValue || value < Int64.MinValue)
+                return value;
+
+            return (long)value;
         }
     }
 }
