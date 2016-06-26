@@ -4,11 +4,11 @@
     {
         public ushort Hash;
 
-        public short Index;
-        public short IndexLength;
+        public ushort Index;
+        public byte IndexLength;
         public short IndexInstance;
 
-        public short Data;
+        public ushort Data;
         public short DataLength;
         public short DataInstance;
     }

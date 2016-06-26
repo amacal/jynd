@@ -7,7 +7,7 @@ namespace Jynd
         private readonly JyndData data;
         private readonly short[] instances;
 
-        private short position;
+        private ushort position;
         private short instance;
         private short depth;
 
@@ -117,7 +117,7 @@ namespace Jynd
 
         private void ProcessArrayItem()
         {
-            short start = position;
+            ushort start = position;
 
             GetValue();
             data.AddItem(instances[depth], start, (short)(position - start), (short)(instances[depth] + 1));
@@ -125,8 +125,8 @@ namespace Jynd
 
         private void ProcessProperty()
         {
-            short length = 0;
-            short start = position;
+            byte length = 0;
+            ushort start = position;
 
             while (data.Source[position] != '"')
             {
@@ -137,7 +137,7 @@ namespace Jynd
             position++;
             position++;
 
-            short offset = position;
+            ushort offset = position;
             short assigned = GetValue();
             short dataLength = (short)(position - offset);
 
