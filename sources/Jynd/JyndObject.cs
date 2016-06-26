@@ -1,4 +1,5 @@
 ﻿using System.Dynamic;
+using System.Runtime.CompilerServices;
 
 namespace Jynd
 {
@@ -15,13 +16,24 @@ namespace Jynd
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
-            JyndItem? item = data.Find(binder.Name, instance);
+            result = GetValueOrThrow(binder.Name);
+            return true;
+        }
+
+        public dynamic this[string name]
+        {
+            get { return GetValueOrThrow(name); }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private dynamic GetValueOrThrow(string name)
+        {
+            JyndItem? item = data.Find(name, instance);
 
             if (item.HasValue == false)
-                throw new JyndException($"The property '{binder.Name}' does not exist.");
+                throw new JyndException($"The property '{name}' does not exist.");
 
-            result = data.GetValue(item.Value);
-            return true;
+            return data.GetValue(item.Value);
         }
     }
 }

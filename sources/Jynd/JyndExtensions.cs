@@ -6,7 +6,7 @@ namespace Jynd
 {
     public static class JyndExtensions
     {
-        public static object GetValue(this JyndData data, JyndItem item)
+        public static dynamic GetValue(this JyndData data, JyndItem item)
         {
             switch (data.Source[item.Data])
             {
@@ -154,7 +154,7 @@ namespace Jynd
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe static object GetNumber(this JyndData data, JyndItem item)
+        private unsafe static dynamic GetNumber(this JyndData data, JyndItem item)
         {
             fixed (char* ptr = data.Source)
             {
@@ -215,7 +215,7 @@ namespace Jynd
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe static object GetNumberAsInt32OrInt64(char* str, JyndItem item, bool signed, int length)
+        private unsafe static dynamic GetNumberAsInt32OrInt64(char* str, JyndItem item, bool signed, int length)
         {
             long value = 0;
 
