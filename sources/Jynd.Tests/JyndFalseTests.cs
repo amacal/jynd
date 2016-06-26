@@ -13,5 +13,15 @@ namespace Jynd.Tests
 
             Assert.That(data.value, Is.False);
         }
+
+        [Test]
+        public void CanAccessDeserializedFalseAsNullable()
+        {
+            string json = @"{""value"":false}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            bool? value = data.value;
+            Assert.That(value, Is.False);
+        }
     }
 }

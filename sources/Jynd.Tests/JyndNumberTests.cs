@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
 
 namespace Jynd.Tests
 {
@@ -16,21 +15,13 @@ namespace Jynd.Tests
         }
 
         [Test]
-        public void CanAccessDeserializedInt32Nullable()
-        {
-            string json = @"{""value"":null}";
-            dynamic data = JyndConvert.Deserialize(json);
-
-            Assert.That(data.value, Is.Null);
-        }
-
-        [Test]
         public void CanAccessDeserializedInt32AsInt64()
         {
             string json = @"{""value"":123}";
             dynamic data = JyndConvert.Deserialize(json);
 
-            Assert.That((Int64)data.value, Is.EqualTo(123));
+            long value = data.value;
+            Assert.That(value, Is.EqualTo(123));
         }
 
         [Test]
@@ -49,7 +40,7 @@ namespace Jynd.Tests
             dynamic data = JyndConvert.Deserialize(json);
 
             Assert.That(data.value, Is.EqualTo(2147483647));
-            Assert.That(data.value, Is.TypeOf<Int32>());
+            Assert.That(data.value, Is.TypeOf<int>());
         }
 
         [Test]
@@ -59,7 +50,7 @@ namespace Jynd.Tests
             dynamic data = JyndConvert.Deserialize(json);
 
             Assert.That(data.value, Is.EqualTo(-2147483648));
-            Assert.That(data.value, Is.TypeOf<Int32>());
+            Assert.That(data.value, Is.TypeOf<int>());
         }
 
         [Test]
@@ -69,7 +60,7 @@ namespace Jynd.Tests
             dynamic data = JyndConvert.Deserialize(json);
 
             Assert.That(data.value, Is.EqualTo(2147483648L));
-            Assert.That(data.value, Is.TypeOf<Int64>());
+            Assert.That(data.value, Is.TypeOf<long>());
         }
 
         [Test]
@@ -79,7 +70,7 @@ namespace Jynd.Tests
             dynamic data = JyndConvert.Deserialize(json);
 
             Assert.That(data.value, Is.EqualTo(-2147483649L));
-            Assert.That(data.value, Is.TypeOf<Int64>());
+            Assert.That(data.value, Is.TypeOf<long>());
         }
 
         [Test]
@@ -89,7 +80,7 @@ namespace Jynd.Tests
             dynamic data = JyndConvert.Deserialize(json);
 
             Assert.That(data.value, Is.EqualTo(9223372036854775807L));
-            Assert.That(data.value, Is.TypeOf<Int64>());
+            Assert.That(data.value, Is.TypeOf<long>());
         }
 
         [Test]
@@ -99,7 +90,7 @@ namespace Jynd.Tests
             dynamic data = JyndConvert.Deserialize(json);
 
             Assert.That(data.value, Is.EqualTo(-9223372036854775808L));
-            Assert.That(data.value, Is.TypeOf<Int64>());
+            Assert.That(data.value, Is.TypeOf<long>());
         }
     }
 }

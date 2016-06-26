@@ -34,5 +34,35 @@ namespace Jynd.Tests
             string value = data.value;
             Assert.That(value, Is.Null);
         }
+
+        [Test]
+        public void CanAccessDeserializedNullAsBool()
+        {
+            string json = @"{""value"":null}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            bool? value = data.value;
+            Assert.That(value, Is.Null);
+        }
+
+        [Test]
+        public void CanAccessDeserializedNullAsArray()
+        {
+            string json = @"{""value"":null}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            dynamic[] value = data.value;
+            Assert.That(value, Is.Null);
+        }
+
+        [Test]
+        public void CanAccessDeserializedNullAsObject()
+        {
+            string json = @"{""value"":null}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            dynamic value = data.value;
+            Assert.That(value, Is.Null);
+        }
     }
 }
