@@ -7,6 +7,7 @@ namespace Jynd
 {
     public static class JyndExtensions
     {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static dynamic GetValue(this JyndData data, JyndItem item)
         {
             switch (data.Source[item.Data])
@@ -43,7 +44,6 @@ namespace Jynd
             StringBuilder builder = new StringBuilder();
             int end = item.Data - item.DataLength - 1;
             int start = item.Data + 1;
-            int number;
 
             for (int i = start; i < end; i++)
             {
@@ -56,7 +56,7 @@ namespace Jynd
                     {
                         case 'u':
 
-                            number = 0;
+                            int number = 0;
                             i++;
 
                             for (int k = i; k < i + 4; k++)
@@ -155,7 +155,7 @@ namespace Jynd
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe static dynamic GetNumber(this JyndData data, JyndItem item)
+        private static unsafe dynamic GetNumber(this JyndData data, JyndItem item)
         {
             fixed (char* ptr = data.Source)
             {
@@ -186,7 +186,7 @@ namespace Jynd
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe static int GetNumberAsInt32(char* str, JyndItem item, bool signed, int length)
+        private static unsafe int GetNumberAsInt32(char* str, JyndItem item, bool signed, int length)
         {
             int value = 0;
 
@@ -204,7 +204,7 @@ namespace Jynd
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe static long GetNumberAsInt64(char* str, JyndItem item, bool signed, int length)
+        private static unsafe long GetNumberAsInt64(char* str, JyndItem item, bool signed, int length)
         {
             long value = 0;
 
@@ -222,7 +222,7 @@ namespace Jynd
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe static BigInteger GetNumberAsBigInteger(char* str, JyndItem item, bool signed, int length)
+        private static unsafe BigInteger GetNumberAsBigInteger(char* str, JyndItem item, bool signed, int length)
         {
             BigInteger value = 0;
 
@@ -240,7 +240,7 @@ namespace Jynd
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe static dynamic GetNumberAsInt32OrInt64(char* str, JyndItem item, bool signed, int length)
+        private static unsafe dynamic GetNumberAsInt32OrInt64(char* str, JyndItem item, bool signed, int length)
         {
             long value = 0;
 
@@ -261,7 +261,7 @@ namespace Jynd
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe static dynamic GetNumberAsInt64OrBigInteger(char* str, JyndItem item, bool signed, int length)
+        private static unsafe dynamic GetNumberAsInt64OrBigInteger(char* str, JyndItem item, bool signed, int length)
         {
             BigInteger value = 0;
 

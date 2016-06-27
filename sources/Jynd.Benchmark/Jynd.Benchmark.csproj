@@ -36,8 +36,8 @@
       <HintPath>..\..\packages\Jil.2.14.3\lib\net45\Jil.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NetJSON, Version=1.1.0.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NetJSON.1.1.0.4\lib\net40\NetJSON.dll</HintPath>
+    <Reference Include="NetJSON, Version=1.1.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NetJSON.1.1.0.5\lib\net40\NetJSON.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
