@@ -22,35 +22,35 @@ if (instance.age > 18)
 Benchmark-name         : wikipedia-person
 Benchmark-iterations   : 1000000
 Benchmark-source       : https://en.wikipedia.org/wiki/JSON
-  Newtonsoft-static    : 00:00:08.4715046
-  Jil-static           : 00:00:02.2096915
-  NetJSON-static       : 00:00:02.4266845
-  ServiceStack-static  : 00:00:06.9966332
-  Newtonsoft-dynamic   : 00:00:14.6977741
-  Jil-dynamic          : 00:00:06.4721997
-  Jynd-dynamic         : 00:00:01.8908531
+  Newtonsoft-static    : 00:00:08.9546492
+  Jil-static           : 00:00:02.2172097
+  NetJSON-static       : 00:00:02.4871492
+  ServiceStack-static  : 00:00:07.1992085
+  Newtonsoft-dynamic   : 00:00:15.0494888
+  Jil-dynamic          : 00:00:06.7985713
+  Jynd-dynamic         : 00:00:01.9538601
 
 Benchmark-name         : github-team
 Benchmark-iterations   : 1000000
 Benchmark-source       : https://developer.github.com/v3/orgs/teams/
-  Newtonsoft-static    : 00:00:09.7894550
-  Jil-static           : 00:00:04.3630510
-  NetJSON-static       : 00:00:05.3863673
-  ServiceStack-static  : 00:00:11.4116519
-  Newtonsoft-dynamic   : 00:00:16.8710579
-  Jil-dynamic          : 00:00:08.7350959
-  Jynd-dynamic         : 00:00:03.0279669
+  Newtonsoft-static    : 00:00:10.1541234
+  Jil-static           : 00:00:04.1735911
+  NetJSON-static       : 00:00:05.3663155
+  ServiceStack-static  : 00:00:11.9032737
+  Newtonsoft-dynamic   : 00:00:17.6650277
+  Jil-dynamic          : 00:00:09.3150849
+  Jynd-dynamic         : 00:00:03.1319912
 
 Benchmark-name         : github-primes
 Benchmark-iterations   : 100000
 Benchmark-source       : https://gist.github.com/miguelmota/ffa20854b1258cd27d7e
-  Newtonsoft-static    : 00:00:14.2209308
-  Jil-static           : 00:00:02.9633484
-  NetJSON-static       : 00:00:05.3728332
-  ServiceStack-static  : 00:00:13.8302390
-  Newtonsoft-dynamic   : 00:00:44.2566514
-  Jil-dynamic          : 00:00:16.9079032
-  Jynd-dynamic         : 00:00:07.3567065
+  Newtonsoft-static    : 00:00:15.2778897
+  Jil-static           : 00:00:03.0255151
+  NetJSON-static       : 00:00:05.5321719
+  ServiceStack-static  : 00:00:13.9883933
+  Newtonsoft-dynamic   : 00:00:45.9942924
+  Jil-dynamic          : 00:00:18.2756314
+  Jynd-dynamic         : 00:00:07.5390734
 ````
 
 ## restrictions
