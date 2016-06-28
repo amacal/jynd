@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Benchmark.cs" />
     <Compile Include="BenchmarkCase.cs" />
+    <Compile Include="Cases\FixerEuroCase.cs" />
     <Compile Include="Cases\GitHubPrimesCase.cs" />
     <Compile Include="Cases\GitHubTeamCase.cs" />
     <Compile Include="Cases\WikipediaPersonCase.cs" />

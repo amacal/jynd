@@ -22,35 +22,46 @@ if (instance.age > 18)
 Benchmark-name         : wikipedia-person
 Benchmark-iterations   : 1000000
 Benchmark-source       : https://en.wikipedia.org/wiki/JSON
-  Newtonsoft-static    : 00:00:08.9546492
-  Jil-static           : 00:00:02.2172097
-  NetJSON-static       : 00:00:02.4871492
-  ServiceStack-static  : 00:00:07.1992085
-  Newtonsoft-dynamic   : 00:00:15.0494888
-  Jil-dynamic          : 00:00:06.7985713
-  Jynd-dynamic         : 00:00:01.9538601
+  Newtonsoft-static    : 00:00:19.4718043
+  Jil-static           : 00:00:04.7601955
+  NetJSON-static       : 00:00:05.0674644
+  ServiceStack-static  : 00:00:16.2145079
+  Newtonsoft-dynamic   : 00:00:35.1612681
+  Jil-dynamic          : 00:00:14.9270240
+  Jynd-dynamic         : 00:00:04.5552243
 
 Benchmark-name         : github-team
 Benchmark-iterations   : 1000000
 Benchmark-source       : https://developer.github.com/v3/orgs/teams/
-  Newtonsoft-static    : 00:00:10.1541234
-  Jil-static           : 00:00:04.1735911
-  NetJSON-static       : 00:00:05.3663155
-  ServiceStack-static  : 00:00:11.9032737
-  Newtonsoft-dynamic   : 00:00:17.6650277
-  Jil-dynamic          : 00:00:09.3150849
-  Jynd-dynamic         : 00:00:03.1319912
+  Newtonsoft-static    : 00:00:19.7743951
+  Jil-static           : 00:00:08.8803099
+  NetJSON-static       : 00:00:11.8112194
+  ServiceStack-static  : 00:00:23.1389613
+  Newtonsoft-dynamic   : 00:00:35.9433564
+  Jil-dynamic          : 00:00:18.9785865
+  Jynd-dynamic         : 00:00:06.4869722
 
 Benchmark-name         : github-primes
 Benchmark-iterations   : 100000
 Benchmark-source       : https://gist.github.com/miguelmota/ffa20854b1258cd27d7e
-  Newtonsoft-static    : 00:00:15.2778897
-  Jil-static           : 00:00:03.0255151
-  NetJSON-static       : 00:00:05.5321719
-  ServiceStack-static  : 00:00:13.9883933
-  Newtonsoft-dynamic   : 00:00:45.9942924
-  Jil-dynamic          : 00:00:18.2756314
-  Jynd-dynamic         : 00:00:07.5390734
+  Newtonsoft-static    : 00:00:27.2725249
+  Jil-static           : 00:00:06.8932180
+  NetJSON-static       : 00:00:09.6496821
+  ServiceStack-static  : 00:00:27.0691667
+  Newtonsoft-dynamic   : 00:01:14.6536811
+  Jil-dynamic          : 00:00:35.0228753
+  Jynd-dynamic         : 00:00:15.1807016
+
+Benchmark-name         : fixer-euro
+Benchmark-iterations   : 1000000
+Benchmark-source       : http://fixer.io/
+  Newtonsoft-static    : 00:00:31.8951903
+  Jil-static           : 00:00:09.0630034
+  NetJSON-static       : 00:00:18.5166973
+  ServiceStack-static  : 00:00:25.8890766
+  Newtonsoft-dynamic   : 00:00:54.0693575
+  Jil-dynamic          : 00:00:33.8668013
+  Jynd-dynamic         : 00:00:04.8961307
 ````
 
 ## restrictions
@@ -59,7 +70,7 @@ Benchmark-source       : https://gist.github.com/miguelmota/ffa20854b1258cd27d7e
 * parsed text is valid json
 * white characters between tokens are not accepted
 * property name character escaping is not accepted
-* numbers are deserialized currently only to Int32, Int64 or BigInteger
+* numbers are deserialized only to Int32, Int64, BigInteger or Double
 * deserialized object should be consumed before deserializing next one
 * only json primitives; no datetime, no guid etc.
 

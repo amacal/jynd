@@ -13,6 +13,7 @@ namespace Jynd.Tests
             dynamic data = JyndConvert.Deserialize(json);
 
             Assert.That(data.value, Is.EqualTo(123));
+            Assert.That(data.value, Is.TypeOf<int>());
         }
 
         [Test]
@@ -32,6 +33,7 @@ namespace Jynd.Tests
             dynamic data = JyndConvert.Deserialize(json);
 
             Assert.That(data.value, Is.EqualTo(-123));
+            Assert.That(data.value, Is.TypeOf<int>());
         }
 
         [Test]
@@ -81,6 +83,7 @@ namespace Jynd.Tests
             dynamic data = JyndConvert.Deserialize(json);
 
             Assert.That(data.value, Is.EqualTo(922337203685L));
+            Assert.That(data.value, Is.TypeOf<long>());
         }
 
         [Test]
@@ -90,6 +93,7 @@ namespace Jynd.Tests
             dynamic data = JyndConvert.Deserialize(json);
 
             Assert.That(data.value, Is.EqualTo(-922337203685L));
+            Assert.That(data.value, Is.TypeOf<long>());
         }
 
         [Test]
@@ -150,6 +154,26 @@ namespace Jynd.Tests
 
             BigInteger value = BigInteger.Parse("-92233720368532743274237423742342134");
             Assert.That(data.value, Is.EqualTo(value));
+        }
+
+        [Test]
+        public void CanAccessDeserializedDouble()
+        {
+            string json = @"{""value"":123.456}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.value, Is.EqualTo(123.456));
+            Assert.That(data.value, Is.TypeOf<double>());
+        }
+
+        [Test]
+        public void CanAccessDeserializedDoubleWithNegation()
+        {
+            string json = @"{""value"":-123.456}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.value, Is.EqualTo(-123.456));
+            Assert.That(data.value, Is.TypeOf<double>());
         }
     }
 }

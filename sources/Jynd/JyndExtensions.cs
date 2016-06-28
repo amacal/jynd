@@ -155,7 +155,16 @@ namespace Jynd
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe dynamic GetNumber(this JyndData data, JyndItem item)
+        private static dynamic GetNumber(this JyndData data, JyndItem item)
+        {
+            if (item.DataLength > 0)
+                return GetNumberAsIntegralType(data, item);
+
+            return GetNumberAsFloatingType(data, item);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe dynamic GetNumberAsIntegralType(this JyndData data, JyndItem item)
         {
             fixed (char* ptr = data.Source)
             {
@@ -279,6 +288,60 @@ namespace Jynd
                 return value;
 
             return (long)value;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe dynamic GetNumberAsFloatingType(this JyndData data, JyndItem item)
+        {
+            fixed (char* ptr = data.Source)
+            {
+                char* str = ptr + item.Data;
+                int length = -item.DataLength;
+                bool signed = *str == '-';
+
+                if (signed)
+                {
+                    length--;
+                    str++;
+                }
+
+                return GetNumberAsDouble(str, item, signed, length);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static unsafe double GetNumberAsDouble(char* str, JyndItem item, bool signed, int length)
+        {
+            double integral = 0.0;
+            double fraction = 0.0;
+            double shift = 1.0;
+
+            while (length > 0 && *str != '.')
+            {
+                length--;
+                integral = 10 * integral + (*str++ - '0');
+            }
+
+            if (length > 0)
+            {
+                length--;
+                str++;
+            }
+
+            while (length-- > 0)
+            {
+                shift = shift / 10;
+                fraction = fraction + shift * (*str++ - '0');
+            }
+
+            integral = integral + fraction;
+
+            if (signed)
+            {
+                return -integral;
+            }
+
+            return integral;
         }
     }
 }

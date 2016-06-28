@@ -10,6 +10,7 @@ namespace Jynd.Benchmark
             Execute(WikipediaPersonCase.Instance);
             Execute(GitHubTeamCase.Instance);
             Execute(GitHubPrimesCase.Instance);
+            Execute(FixerEuroCase.Instance);
         }
 
         private static void Execute<T>(BenchmarkCase<T> benchmark)

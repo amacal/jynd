@@ -11,7 +11,7 @@ namespace Jynd
         private short instance;
         private short depth;
 
-        private bool escaping;
+        private bool special;
 
         public JyndParser(JyndData data, short[] instances)
         {
@@ -141,10 +141,10 @@ namespace Jynd
             short assigned = GetValue();
             short dataLength = (short)(position - offset);
 
-            if (escaping)
+            if (special)
             {
                 dataLength = (short)-dataLength;
-                escaping = false;
+                special = false;
             }
 
             data.AddIndexed(start, length, instances[depth], offset, dataLength, assigned);
@@ -154,12 +154,12 @@ namespace Jynd
         private void ProcessText()
         {
             bool escaped = false;
-            escaping = false;
+            special = false;
 
             while (data.Source[position] != '"' || escaped)
             {
                 escaped = data.Source[position] == '\\' && escaped == false;
-                escaping |= escaped;
+                special |= escaped;
                 position++;
             }
 
@@ -191,11 +191,13 @@ namespace Jynd
             bool completed = false;
 
             position--;
+            special = false;
 
             do
             {
                 character = data.Source[++position];
                 completed = character == ',' || character == '}' || character == ']';
+                special = special || character == '.' || character == 'e' || character == 'E';
             }
             while (completed == false);
         }
