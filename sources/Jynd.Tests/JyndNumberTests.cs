@@ -175,5 +175,92 @@ namespace Jynd.Tests
             Assert.That(data.value, Is.EqualTo(-123.456));
             Assert.That(data.value, Is.TypeOf<double>());
         }
+
+        [Test]
+        public void CanAccessDeserializedInt32ExplicitlyUsingObject()
+        {
+            string json = @"{""value"":123}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.GetInt32("value"), Is.EqualTo(123));
+            Assert.That(data.GetInt32("value"), Is.TypeOf<int>());
+        }
+
+        [Test]
+        public void CanAccessDeserializedInt32ExplicitlyUsingArray()
+        {
+            string json = @"[123]";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.GetInt32(0), Is.EqualTo(123));
+            Assert.That(data.GetInt32(0), Is.TypeOf<int>());
+        }
+
+        [Test]
+        public void CanAccessDeserializedInt32ExplicitlyAsNull()
+        {
+            string json = @"{""value"":null}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.GetInt32("value"), Is.Null);
+        }
+
+        [Test]
+        public void CanAccessDeserializedInt64ExplicitlyUsingObject()
+        {
+            string json = @"{""value"":123}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.GetInt64("value"), Is.EqualTo(123));
+            Assert.That(data.GetInt64("value"), Is.TypeOf<long>());
+        }
+
+        [Test]
+        public void CanAccessDeserializedInt64ExplicitlyUsingArrayAsInt64()
+        {
+            string json = @"[123]";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.GetInt64(0), Is.EqualTo(123));
+            Assert.That(data.GetInt64(0), Is.TypeOf<long>());
+        }
+
+        [Test]
+        public void CanAccessDeserializedInt64ExplicitlyAsNull()
+        {
+            string json = @"{""value"":null}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.GetInt64("value"), Is.Null);
+        }
+
+        [Test]
+        public void CanAccessDeserializedBigIntegerExplicitlyUsingObject()
+        {
+            string json = @"{""value"":123}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.GetBigInteger("value"), Is.EqualTo(new BigInteger(123)));
+            Assert.That(data.GetBigInteger("value"), Is.TypeOf<BigInteger>());
+        }
+
+        [Test]
+        public void CanAccessDeserializedBigIntegerExplicitlyUsingArrayAsInt64()
+        {
+            string json = @"[123]";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.GetBigInteger(0), Is.EqualTo(new BigInteger(123)));
+            Assert.That(data.GetBigInteger(0), Is.TypeOf<BigInteger>());
+        }
+
+        [Test]
+        public void CanAccessDeserializedBigIntegerExplicitlyAsNull()
+        {
+            string json = @"{""value"":null}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.GetBigInteger("value"), Is.Null);
+        }
     }
 }

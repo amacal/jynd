@@ -1,7 +1,7 @@
 # jynd
 
 A library aims to deserialize json structure without being json deserializer.
-It's designed to sequentially process a lot of json data without accessing all values.
+It's designed to sequentially process a lot of normalized json data without accessing all values.
 
 ## usage
 

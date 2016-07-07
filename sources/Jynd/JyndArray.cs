@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Runtime.CompilerServices;
 
 namespace Jynd
 {
@@ -18,30 +20,45 @@ namespace Jynd
             get { return data.Count(instance); }
         }
 
-        public dynamic this[int index]
-        {
-            get
-            {
-                int counter = 0;
-
-                foreach (JyndItem i in data.All(instance))
-                {
-                    if (index == counter++)
-                    {
-                        return data.GetValue(i);
-                    }
-                }
-
-                return null;
-            }
-        }
-
         public IEnumerator GetEnumerator()
         {
             foreach (JyndItem i in data.All(instance))
             {
                 yield return data.GetValue(i);
             }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private JyndItem FindOrThrow(int index)
+        {
+            JyndItem? item = data.At(instance, index);
+
+            if (item.HasValue == false)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            return item.Value;
+        }
+
+        public dynamic this[int index]
+        {
+            get { return data.GetValue(FindOrThrow(index)); }
+        }
+
+        public dynamic GetInt32(int index)
+        {
+            return data.GetInt32OrNull(FindOrThrow(index));
+        }
+
+        public dynamic GetInt64(int index)
+        {
+            return data.GetInt64OrNull(FindOrThrow(index));
+        }
+
+        public dynamic GetBigInteger(int index)
+        {
+            return data.GetBigIntegerOrNull(FindOrThrow(index));
         }
     }
 }

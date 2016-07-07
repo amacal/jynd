@@ -79,15 +79,6 @@ namespace Jynd.Tests
         }
 
         [Test]
-        public void CanAccessPropertyUsingIndexer()
-        {
-            string json = @"{""value"":""a""}";
-            dynamic data = JyndConvert.Deserialize(json);
-
-            Assert.That(data["value"], Is.EqualTo("a"));
-        }
-
-        [Test]
         public void ThrowsExceptionOnUnknownProperty()
         {
             string json = @"{""value"":""a"",""data"":""b""}";
@@ -99,6 +90,15 @@ namespace Jynd.Tests
         }
 
         [Test]
+        public void CanAccessPropertyUsingIndexer()
+        {
+            string json = @"{""value"":""a""}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data["value"], Is.EqualTo("a"));
+        }
+
+        [Test]
         public void ThrowsExceptionOnUnknownPropertyAccessedByIndexer()
         {
             string json = @"{""value"":""a"",""data"":""b""}";
@@ -107,6 +107,24 @@ namespace Jynd.Tests
             TestDelegate callback = () => data["missing"].ToString();
 
             Assert.That(callback, Throws.InstanceOf<JyndException>());
+        }
+
+        [Test]
+        public void CanCheckExistingPropertyUsingHasMethod()
+        {
+            string json = @"{""value"":""a"",""data"":""b""}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.Has("value"), Is.True);
+        }
+
+        [Test]
+        public void CanCheckMissingPropertyUsingHasMethod()
+        {
+            string json = @"{""value"":""a"",""data"":""b""}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.Has("nothing"), Is.False);
         }
     }
 }

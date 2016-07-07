@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 
 namespace Jynd.Tests
 {
@@ -65,6 +66,28 @@ namespace Jynd.Tests
             Assert.That(data.value[1], Is.EqualTo(1));
             Assert.That(data.value[2], Is.EqualTo(2));
             Assert.That(data.value[3], Is.EqualTo(3));
+        }
+
+        [Test]
+        public void ThrowsExceptionWhenIndexIsNegative()
+        {
+            string json = @"[0,1,2,3]";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            TestDelegate callback = () => data[-1].ToString();
+
+            Assert.That(callback, Throws.InstanceOf<IndexOutOfRangeException>());
+        }
+
+        [Test]
+        public void ThrowsExceptionWhenIndexIsTooBig()
+        {
+            string json = @"[0,1,2,3]";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            TestDelegate callback = () => data[4].ToString();
+
+            Assert.That(callback, Throws.InstanceOf<IndexOutOfRangeException>());
         }
     }
 }

@@ -27,6 +27,7 @@ namespace Jynd
             get { return source; }
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void AddIndexed(ushort index, byte indexLength, short indexInstance, ushort data, short dataLength, short dataInstance)
         {
             ushort hash = ToHash(source, index, indexLength);
@@ -44,6 +45,7 @@ namespace Jynd
             };
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void AddItem(short indexInstance, ushort data, short dataLength, short dataInstance)
         {
             items[count++] = new JyndItem
@@ -55,6 +57,7 @@ namespace Jynd
             };
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public JyndItem? Find(string text, int instance)
         {
             ushort hash = ToHash(text);
@@ -91,6 +94,7 @@ namespace Jynd
             return null;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int Count(int instance)
         {
             int counter = 0;
@@ -106,6 +110,7 @@ namespace Jynd
             return counter;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IEnumerable<JyndItem> All(int instance)
         {
             for (int i = 0; i < count; i++)
@@ -118,11 +123,29 @@ namespace Jynd
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public JyndItem? At(int instance, int index)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                if (items[i].IndexInstance == instance)
+                {
+                    if (index-- == 0)
+                    {
+                        return items[i];
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static ushort ToHash(string text)
         {
             return ToHash(text, 0, text.Length);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static ushort ToHash(string text, int offset, int length)
         {
             ushort hash = 5381;
@@ -138,6 +161,7 @@ namespace Jynd
             return hash;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool Equals(string left, string right, int offset, int length)
         {
             if (left.Length != length)

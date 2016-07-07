@@ -28,12 +28,38 @@ namespace Jynd
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private dynamic GetValueOrThrow(string name)
         {
+            return data.GetValue(FindOrThrow(name));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private JyndItem FindOrThrow(string name)
+        {
             JyndItem? item = data.Find(name, instance);
 
             if (item.HasValue == false)
                 throw new JyndException($"The property '{name}' does not exist.");
 
-            return data.GetValue(item.Value);
+            return item.Value;
+        }
+
+        public bool Has(string name)
+        {
+            return data.Find(name, instance).HasValue;
+        }
+
+        public dynamic GetInt32(string name)
+        {
+            return data.GetInt32OrNull(FindOrThrow(name));
+        }
+
+        public dynamic GetInt64(string name)
+        {
+            return data.GetInt64OrNull(FindOrThrow(name));
+        }
+
+        public dynamic GetBigInteger(string name)
+        {
+            return data.GetBigIntegerOrNull(FindOrThrow(name));
         }
     }
 }

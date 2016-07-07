@@ -36,6 +36,72 @@ namespace Jynd
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe dynamic GetInt32OrNull(this JyndData data, JyndItem item)
+        {
+            if (data.Source[item.Data] == 'n')
+                return data.GetNull(item);
+
+            fixed (char* ptr = data.Source)
+            {
+                char* str = ptr + item.Data;
+                int length = item.DataLength;
+                bool signed = *str == '-';
+
+                if (signed)
+                {
+                    length--;
+                    str++;
+                }
+
+                return GetNumberAsInt32(str, item, signed, length);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe dynamic GetInt64OrNull(this JyndData data, JyndItem item)
+        {
+            if (data.Source[item.Data] == 'n')
+                return data.GetNull(item);
+
+            fixed (char* ptr = data.Source)
+            {
+                char* str = ptr + item.Data;
+                int length = item.DataLength;
+                bool signed = *str == '-';
+
+                if (signed)
+                {
+                    length--;
+                    str++;
+                }
+
+                return GetNumberAsInt64(str, item, signed, length);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe dynamic GetBigIntegerOrNull(this JyndData data, JyndItem item)
+        {
+            if (data.Source[item.Data] == 'n')
+                return data.GetNull(item);
+
+            fixed (char* ptr = data.Source)
+            {
+                char* str = ptr + item.Data;
+                int length = item.DataLength;
+                bool signed = *str == '-';
+
+                if (signed)
+                {
+                    length--;
+                    str++;
+                }
+
+                return GetNumberAsBigInteger(str, item, signed, length);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static string GetText(this JyndData data, JyndItem item)
         {
             if (item.DataLength > 0)
