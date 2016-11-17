@@ -38,6 +38,7 @@ namespace Jynd
                     depth++;
                     assigned = ++instance;
                     instances[depth] = instance;
+                    ProcessWhiteCharacters();
                     ProcessObject();
                     depth--;
                     break;
@@ -47,6 +48,7 @@ namespace Jynd
                     depth++;
                     assigned = ++instance;
                     instances[depth] = instance;
+                    ProcessWhiteCharacters();
                     ProcessArray();
                     depth--;
                     break;
@@ -107,10 +109,12 @@ namespace Jynd
                 }
 
                 ProcessArrayItem();
+                ProcessWhiteCharacters();
 
                 if (data.Source[position] == ',')
                 {
                     position++;
+                    ProcessWhiteCharacters();
                 }
             }
         }
@@ -120,7 +124,16 @@ namespace Jynd
             ushort start = position;
 
             GetValue();
-            data.AddItem(instances[depth], start, (short)(position - start), (short)(instances[depth] + 1));
+
+            short dataLength = (short)(position - start);
+
+            if (special)
+            {
+                dataLength = (short)-dataLength;
+                special = false;
+            }
+
+            data.AddItem(instances[depth], start, dataLength, (short)(instances[depth] + 1));
         }
 
         private void ProcessProperty()
@@ -134,8 +147,13 @@ namespace Jynd
                 position++;
             }
 
+            while (data.Source[position] != ':')
+            {
+                position++;
+            }
+
             position++;
-            position++;
+            ProcessWhiteCharacters();
 
             ushort offset = position;
             short assigned = GetValue();
@@ -188,7 +206,7 @@ namespace Jynd
         private void ProcessNumber()
         {
             char character;
-            bool completed = false;
+            bool completed;
 
             position--;
             special = false;
@@ -196,10 +214,19 @@ namespace Jynd
             do
             {
                 character = data.Source[++position];
-                completed = character == ',' || character == '}' || character == ']';
+                completed = character == ',' || character == '}' || character == ']' || character == ' ';
                 special = special || character == '.' || character == 'e' || character == 'E';
             }
             while (completed == false);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void ProcessWhiteCharacters()
+        {
+            while (data.Source[position] == ' ')
+            {
+                position++;
+            }
         }
     }
 }

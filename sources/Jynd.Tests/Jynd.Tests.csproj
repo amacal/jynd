@@ -46,6 +46,7 @@
     <Compile Include="JyndObjectTests.cs" />
     <Compile Include="JyndTextTests.cs" />
     <Compile Include="JyndTrueTests.cs" />
+    <Compile Include="JyndWhiteTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
