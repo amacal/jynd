@@ -7,7 +7,16 @@ namespace Jynd
 {
     public static class JyndExtensions
     {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsObject(this JyndData data, JyndItem item)
+        {
+            return data.Source[item.Data] == '{';
+        }
+
+        public static bool IsArray(this JyndData data, JyndItem item)
+        {
+            return data.Source[item.Data] == '[';
+        }
+
         public static dynamic GetValue(this JyndData data, JyndItem item)
         {
             switch (data.Source[item.Data])
@@ -129,19 +138,19 @@ namespace Jynd
                             {
                                 if (data.Source[k] <= '9')
                                 {
-                                    number = number * 16 + data.Source[k] - '0';
+                                    number = number*16 + data.Source[k] - '0';
                                 }
                                 else if (data.Source[k] <= 'f')
                                 {
-                                    number = number * 16 + data.Source[k] - 'a' + 10;
+                                    number = number*16 + data.Source[k] - 'a' + 10;
                                 }
                                 else
                                 {
-                                    number = number * 16 + data.Source[k] - 'A' + 10;
+                                    number = number*16 + data.Source[k] - 'A' + 10;
                                 }
                             }
 
-                            builder.Append((char)number);
+                            builder.Append((char) number);
                             i += 3;
                             break;
 
@@ -267,7 +276,7 @@ namespace Jynd
 
             while (length-- > 0)
             {
-                value = 10 * value + (*str++ - '0');
+                value = 10*value + (*str++ - '0');
             }
 
             if (signed)
@@ -285,7 +294,7 @@ namespace Jynd
 
             while (length-- > 0)
             {
-                value = 10 * value + (*str++ - '0');
+                value = 10*value + (*str++ - '0');
             }
 
             if (signed)
@@ -303,7 +312,7 @@ namespace Jynd
 
             while (length-- > 0)
             {
-                value = 10 * value + (*str++ - '0');
+                value = 10*value + (*str++ - '0');
             }
 
             if (signed)
@@ -321,7 +330,7 @@ namespace Jynd
 
             while (length-- > 0)
             {
-                value = 10 * value + (*str++ - '0');
+                value = 10*value + (*str++ - '0');
             }
 
             if (signed)
@@ -332,7 +341,7 @@ namespace Jynd
             if (value > Int32.MaxValue || value < Int32.MinValue)
                 return value;
 
-            return (int)value;
+            return (int) value;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -342,7 +351,7 @@ namespace Jynd
 
             while (length-- > 0)
             {
-                value = 10 * value + (*str++ - '0');
+                value = 10*value + (*str++ - '0');
             }
 
             if (signed)
@@ -353,7 +362,7 @@ namespace Jynd
             if (value > Int64.MaxValue || value < Int64.MinValue)
                 return value;
 
-            return (long)value;
+            return (long) value;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -385,7 +394,7 @@ namespace Jynd
             while (length > 0 && *str != '.')
             {
                 length--;
-                integral = 10 * integral + (*str++ - '0');
+                integral = 10*integral + (*str++ - '0');
             }
 
             if (length > 0)
@@ -396,8 +405,8 @@ namespace Jynd
 
             while (length-- > 0)
             {
-                shift = shift / 10;
-                fraction = fraction + shift * (*str++ - '0');
+                shift = shift/10;
+                fraction = fraction + shift*(*str++ - '0');
             }
 
             integral = integral + fraction;

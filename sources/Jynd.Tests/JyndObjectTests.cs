@@ -126,5 +126,14 @@ namespace Jynd.Tests
 
             Assert.That(data.Has("nothing"), Is.False);
         }
+
+        [Test]
+        public void CanCheckIfPropertyIsObject()
+        {
+            string json = @"{""value"":{""value"":""b""}}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.IsObject("value"), Is.True);
+        }
     }
 }

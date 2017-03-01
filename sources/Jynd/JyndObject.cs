@@ -47,6 +47,16 @@ namespace Jynd
             return data.Find(name, instance).HasValue;
         }
 
+        public bool IsObject(string name)
+        {
+            return data.IsObject(FindOrThrow(name));
+        }
+
+        public bool IsArray(string name)
+        {
+            return data.IsArray(FindOrThrow(name));
+        }
+
         public dynamic GetInt32(string name)
         {
             return data.GetInt32OrNull(FindOrThrow(name));

@@ -89,5 +89,14 @@ namespace Jynd.Tests
 
             Assert.That(callback, Throws.InstanceOf<IndexOutOfRangeException>());
         }
+
+        [Test]
+        public void CanCheckIfPropertyIsArray()
+        {
+            string json = @"{""value"":[0,1,2,3]}";
+            dynamic data = JyndConvert.Deserialize(json);
+
+            Assert.That(data.IsArray("value"), Is.True);
+        }
     }
 }
