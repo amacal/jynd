@@ -22,46 +22,46 @@ if (instance.age > 18)
 Benchmark-name         : wikipedia-person
 Benchmark-iterations   : 1000000
 Benchmark-source       : https://en.wikipedia.org/wiki/JSON
-  Newtonsoft-static    : 00:00:20.0913329
-  Jil-static           : 00:00:04.7922523
-  NetJSON-static       : 00:00:05.2041902
-  ServiceStack-static  : 00:00:15.4295675
-  Newtonsoft-dynamic   : 00:00:35.4852685
-  Jil-dynamic          : 00:00:15.2092177
-  Jynd-dynamic         : 00:00:05.0953514
+  Newtonsoft-static    : 00:00:19.6284385
+  Jil-static           : 00:00:04.8075561
+  NetJSON-static       : 00:00:05.1280916
+  ServiceStack-static  : 00:00:15.4008608
+  Newtonsoft-dynamic   : 00:00:35.3618547
+  Jil-dynamic          : 00:00:15.3072735
+  Jynd-dynamic         : 00:00:05.0947314
 
 Benchmark-name         : github-team
 Benchmark-iterations   : 1000000
 Benchmark-source       : https://developer.github.com/v3/orgs/teams/
-  Newtonsoft-static    : 00:00:19.8313953
-  Jil-static           : 00:00:09.0153911
-  NetJSON-static       : 00:00:11.4127063
-  ServiceStack-static  : 00:00:22.6657516
-  Newtonsoft-dynamic   : 00:00:37.2469127
-  Jil-dynamic          : 00:00:18.5499242
-  Jynd-dynamic         : 00:00:06.9722213
+  Newtonsoft-static    : 00:00:19.7191821
+  Jil-static           : 00:00:08.8004487
+  NetJSON-static       : 00:00:11.5438021
+  ServiceStack-static  : 00:00:22.7449721
+  Newtonsoft-dynamic   : 00:00:36.6035795
+  Jil-dynamic          : 00:00:18.5391511
+  Jynd-dynamic         : 00:00:06.9575134
 
 Benchmark-name         : github-primes
 Benchmark-iterations   : 100000
 Benchmark-source       : https://gist.github.com/miguelmota/ffa20854b1258cd27d7e
-  Newtonsoft-static    : 00:00:31.1746872
-  Jil-static           : 00:00:06.5717341
-  NetJSON-static       : 00:00:09.6468195
-  ServiceStack-static  : 00:00:27.0097992
-  Newtonsoft-dynamic   : 00:01:18.1358461
-  Jil-dynamic          : 00:00:34.1763395
-  Jynd-dynamic         : 00:00:16.5507528
+  Newtonsoft-static    : 00:00:31.0655920
+  Jil-static           : 00:00:06.6175760
+  NetJSON-static       : 00:00:09.7062584
+  ServiceStack-static  : 00:00:27.5592449
+  Newtonsoft-dynamic   : 00:01:18.4987408
+  Jil-dynamic          : 00:00:33.4526240
+  Jynd-dynamic         : 00:00:16.9399338
 
 Benchmark-name         : fixer-euro
 Benchmark-iterations   : 1000000
 Benchmark-source       : http://fixer.io/
-  Newtonsoft-static    : 00:00:28.5787154
-  Jil-static           : 00:00:09.2379089
-  NetJSON-static       : 00:00:22.8609298
-  ServiceStack-static  : 00:00:25.6122554
-  Newtonsoft-dynamic   : 00:00:51.9982219
-  Jil-dynamic          : 00:00:21.2168637
-  Jynd-dynamic         : 00:00:05.0173793
+  Newtonsoft-static    : 00:00:33.3833455
+  Jil-static           : 00:00:09.1407323
+  NetJSON-static       : 00:00:21.9833665
+  ServiceStack-static  : 00:00:25.4269708
+  Newtonsoft-dynamic   : 00:00:59.4851057
+  Jil-dynamic          : 00:00:20.8130505
+  Jynd-dynamic         : 00:00:04.9891030
 ````
 
 ## restrictions
