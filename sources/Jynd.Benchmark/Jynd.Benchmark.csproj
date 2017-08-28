@@ -34,8 +34,8 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Jil, Version=2.15.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Jil.2.15.2\lib\net45\Jil.dll</HintPath>
+    <Reference Include="Jil, Version=2.15.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Jil.2.15.4\lib\net45\Jil.dll</HintPath>
     </Reference>
     <Reference Include="NetJSON, Version=1.2.1.10, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NetJSON.1.2.1.10\lib\net40\NetJSON.dll</HintPath>
